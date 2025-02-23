@@ -1,5 +1,5 @@
-OpenSystemsMobileDevelopment
-Assignment #1. Playing with Kotlin Implement mechanics of the board game of your choice: 
+OpenSystemsMobileDevelopment  
+Assignment #1. Playing with Kotlin Implement mechanics of the board game of your choice:   
 1.Chess   
 2.Draughts  
 3.Nard   
