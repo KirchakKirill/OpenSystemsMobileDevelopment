@@ -32,6 +32,8 @@ interface Matrix<E> {
     operator fun set(row: Int, column: Int, value: E)
 
     operator fun set(cell: Cell, value: E)
+
+
 }
 
 /**
@@ -45,6 +47,14 @@ fun <E> createMatrix(height: Int, width: Int, e: E): Matrix<E> {
         throw  IllegalArgumentException("height или width <= 0")
     }
     return MatrixImpl<E>(height,width,e)
+}
+
+fun <E> createMatrix(height: Int, width: Int, e: E,initList: List<E>): Matrix<E> {
+
+    if(height <=0 || width <= 0){
+        throw  IllegalArgumentException("height или width <= 0")
+    }
+    return MatrixImpl<E>(height,width,e,initList)
 }
 
 /**
@@ -93,14 +103,68 @@ class MatrixImpl<E> constructor(override val height: Int, override val width: In
             row.joinToString(separator = " ") { it.toString() }
         }
     }
+
+    constructor( height: Int, width: Int, defaultValue:E, initList:List<E>): this(height,width,defaultValue){
+        var k:Int = 0
+        for ( i  in  0 ..<this.height)
+            for (j in 0 ..<this.width) {
+                this.set(i, j, initList[k])
+                k += 1
+            }
+    }
+
+
 }
 
 fun main(){
     val ww: Matrix<Int> = createMatrix<Int>(4,5,0)
     val ww1: Matrix<Int> = createMatrix<Int>(4,5,0)
 
-    ww.set(3,3,11)
-    ww1.set(3,3,12)
+    var key:List<Int> = listOf(1,0,0,1)
+    var lock:List<Int> = listOf(1,0,1,0,1,0,1,1,1)
 
-    println(ww.plus(ww1).toString())
+    var keyMatrix:Matrix<Int> = createMatrix<Int>(2,2,0,key)
+    var lockMatrix:Matrix<Int> = createMatrix<Int>(3,3,0,lock)
+
+    println(keyMatrix.toString())
+    println()
+    println(lockMatrix.toString())
+
+    val exampl1:Triple<Boolean, Int, Int> =  canOpenLock(keyMatrix,lockMatrix)
+    println(exampl1)
+    println()
+
+
+    key = listOf(1,0,0,0,
+                 1,0,1,0,
+                 0,1,0,1,
+                 0,0,0,1)
+
+    lock = listOf(1,0,1,1,0,1,
+                  0,1,0,1,0,1,
+                  1,1,0,1,1,1,
+                  0,0,0,1,0,1,
+                  1,0,1,0,1,0,
+                  1,1,1,1,1,0)
+
+    keyMatrix = createMatrix<Int>(4,4,0,key)
+    lockMatrix = createMatrix<Int>(6,6,0,lock)
+
+    println(keyMatrix.toString())
+    println()
+    println(lockMatrix.toString())
+    val exampl2:Triple<Boolean, Int, Int> =  canOpenLock(keyMatrix,lockMatrix)
+
+    println(exampl2)
+    println()
+
+    println(transpose(keyMatrix))
+    println()
+
+    println(rotate(keyMatrix))
+    println()
+
+    println(findHoles(keyMatrix))
+    println()
+
 }

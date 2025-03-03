@@ -1,9 +1,5 @@
 @file:Suppress("UNUSED_PARAMETER")
 package mmcs.assignment2
-
-import mmcs.assignment2.Matrix
-import mmcs.assignment2.createMatrix
-
 /**
  * Пример
  *
@@ -120,7 +116,7 @@ fun findHoles(matrix: Matrix<Int>): Holes
         var COUNT_COLS = 0
 
         for (j in 0..<matrix.height) {
-            COUNT_COLS+=matrix[i,j]
+            COUNT_COLS+=matrix[j,i]
         }
 
         if (COUNT_COLS==0 || COUNT_COLS==matrix.height)
@@ -154,4 +150,31 @@ data class Holes(val rows: List<Int>, val columns: List<Int>)
  * Вернуть тройку (Triple) -- (да/нет, требуемый сдвиг по высоте, требуемый сдвиг по ширине).
  * Если наложение невозможно, то первый элемент тройки "нет" и сдвиги могут быть любыми.
  */
-fun canOpenLock(key: Matrix<Int>, lock: Matrix<Int>): Triple<Boolean, Int, Int> = TODO()
+fun canOpenLock(key: Matrix<Int>, lock: Matrix<Int>): Triple<Boolean, Int, Int> {
+    val keyHeight = key.height
+    val keyWidth = key.width
+    val lockHeight = lock.height
+    val lockWidth = lock.width
+
+    for (shiftY in 0..lockHeight - keyHeight) {
+        for (shiftX in 0..lockWidth - keyWidth) {
+            var isMatch = true
+
+            for (i in 0..<keyHeight) {
+                for (j in 0..<keyWidth) {
+                    if (lock[shiftY + i,shiftX + j] == key[i,j]) {
+                        isMatch = false
+                        break
+                    }
+                }
+                if (!isMatch) break
+            }
+
+            if (isMatch) {
+                return Triple(true, shiftY, shiftX)
+            }
+        }
+    }
+
+    return Triple(false, -1, -1)
+}
