@@ -145,7 +145,7 @@ class Game
                 else println("Победил игрок №${1}")
             }
 
-            println("Атакует игрок под номером № ${this.playerId}")
+            println("Атакует игрок под номером № ${this.playerId+1}")
             println("Выберите карту, которой хотите атаковать, используя id или закончите раунд")
             handPrintln(this.playerId)
             var input = readLine()
@@ -172,7 +172,7 @@ class Game
                     moveAttack(this.playerId, cardChoose)
                 }
 
-                println("Защищается игрок под номером № ${this.playerId}")
+                println("Защищается игрок под номером № ${this.playerId+1}")
                 println("Выберите карту, которой хотите защищаться, используя id или закончите раунд, написав TAKE(тогда Вы возбмете карты в руку)")
                 handPrintln(this.playerId)
                 input2 = readLine()
@@ -226,14 +226,14 @@ class Game
 
     }
     private fun moveAttack(playerId: Int,card:Card){
-        println("Игрок ${playerId} атаковал :\n${card.toString()} ")
+        println("Игрок ${playerId+1} атаковал :\n${card.toString()} ")
         this.table.add(card)
         this.hands[playerId].remove(card)
         this.playerId = alter(playerId)
     }
 
     private fun moveDefeat(playerId: Int,card:Card){
-        println("Игрок ${playerId} защитился :\n${card.toString()} ")
+        println("Игрок ${playerId+1} защитился :\n${card.toString()} ")
         this.table.add(card)
         this.hands[playerId].remove(card)
         this.playerId = alter(playerId)
