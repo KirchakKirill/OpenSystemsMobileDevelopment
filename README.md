@@ -28,4 +28,8 @@
 
 Связь между ViewModel и Layout реализована с помощью DataBinding.   
 
-Функциональная часть модели представления описана в интерфейсе Калькулятора.   
+Функциональная часть модели представления описана в интерфейсе Калькулятора. 
+
+#  Assignment #4. The Calculator (Jetpack Compose)   
+
+Implement Calculator interface with Jetpack Compose:   
