@@ -45,7 +45,18 @@ class CalculatorViewModel: BaseObservable(), Calculator {
 
     override fun compute() {
         val digitsOperators = digitsOperators()
-        if(digitsOperators.isEmpty()) display.set("0")
+
+        val endsWithOperatorOrDot = when (digitsOperators.lastOrNull())
+        {   '+', '-', '*', '/', '%' -> true
+            else -> false
+        }
+        if(endsWithOperatorOrDot) return
+
+
+        if(digitsOperators.isEmpty()|| digitsOperators.size==1)
+        {
+            return
+        }
 
         val timesDivision = timesDivisionCalculate(digitsOperators)
         if(timesDivision.isEmpty()) return
@@ -131,7 +142,7 @@ class CalculatorViewModel: BaseObservable(), Calculator {
                         }
 
                         newList.add(result)
-                        i += 2 
+                        i += 2
                     } else {
                         newList.add(item)
                         i += 1
