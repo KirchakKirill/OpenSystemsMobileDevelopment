@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- Наша кастомная тема на основе AppCompat -->
+    <style name="Theme.TodoList" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Цвета, которые ты можешь изменить под себя -->
+        <item name="colorPrimary">#2196F3</item>
+        <item name="colorPrimaryDark">#1976D2</item>
+        <item name="colorAccent">#FF4081</item>
+    </style>
+
+</resources>

@@ -19,15 +19,15 @@ class CalculatorViewModel: BaseObservable(), Calculator {
     }
 
     override fun addOperation(op: Operation) {
-        val currentValue = display.get() ?: return // Если display == null, выходим
+        val currentValue = display.get() ?: return
 
-        // Проверяем, заканчивается ли строка на операцию или точку
+
         val endsWithOperatorOrDot = when (currentValue.lastOrNull()) {
             '.', '+', '-', '*', '/', '%' -> true
             else -> false
         }
 
-        // Если строка не заканчивается на оператор или точку, добавляем операцию
+
         if (!endsWithOperatorOrDot) {
             val newValue = when (op) {
                 Operation.ADD -> "$currentValue+"
