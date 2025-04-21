@@ -32,4 +32,13 @@
 
 #  Assignment #4. The Calculator (Jetpack Compose)   
 
-Implement Calculator interface with Jetpack Compose:   
+Implement Calculator interface with Jetpack Compose:  
+
+
+#  Assignment #5. TODO List. Interface    
+
+Создайте простое приложение списка дел с данными-заглушками.    
+
+Используйте recyclerView и адаптеры для заполнения списка.    
+
+Другие макеты не требуются. Данные можно хранить в локальной переменной. Добавление и удаление новых элементов не требуется.    
