@@ -42,3 +42,21 @@ Implement Calculator interface with Jetpack Compose:
 Используйте recyclerView и адаптеры для заполнения списка.    
 
 Другие макеты не требуются. Данные можно хранить в локальной переменной. Добавление и удаление новых элементов не требуется.    
+
+# Assignment #6 TODO List. 2 Navigation    
+
+Add NavigationController to the app.    
+
+1.Add an "Add item" button.   
+2.Add a new item screen.   
+3.Add a detail info to each item.   
+4.Add a detail screen to show detailed information.    
+
+Requirements:      
+
+Three screens:   
+1.todo list, 
+2.an item details screen,   
+3.add a new item screen.   
+
+Navigation Graph / Navigation Host    
