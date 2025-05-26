@@ -1,47 +1,35 @@
 package com.example.todolist
 
-import android.graphics.Paint
 import android.os.Bundle
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.todolist.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var adapter: TodoAdapter
-    private lateinit var headerTextView: TextView
-
-    private val todoList = mutableListOf(
-        TodoItem("Купить хлеб", false),
-        TodoItem("Позвонить маме", true),
-        TodoItem("Пойти в зал", false),
-        TodoItem("Доделать лабу", false),
-        TodoItem("Прочитать книгу", false)
-    )
+    private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        headerTextView = findViewById(R.id.headerTextView)
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
 
-        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        adapter = TodoAdapter(todoList) {
-            updateHeader()
-        }
-        recyclerView.adapter = adapter
-
-        updateHeader()
+        setSupportActionBar(binding.toolbar)
+        appBarConfiguration = AppBarConfiguration(navController.graph)
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
-    private fun updateHeader() {
-        val total = todoList.size
-        val checked = todoList.count { it.isChecked }
-        headerTextView.text = "TODOList          Total: $total - Checked: $checked"
+    override fun onSupportNavigateUp(): Boolean {
+        return findNavController(R.id.nav_host_fragment).navigateUp()
+                || super.onSupportNavigateUp()
     }
 }
-
-data class TodoItem(val title: String, var isChecked: Boolean)
